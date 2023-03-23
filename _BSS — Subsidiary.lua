@@ -5,28 +5,28 @@
 end]]
 
 local GuiColor = {
-	Base_	= Color3.new(0.184314,0.105882,0.4431373);
-	Red_	= Color3.new(0.7,0.3,0.3);
-	Green_	= Color3.new(0.3,0.7,0.3);
-	Blue_	= Color3.new(0.3,0.3,0.7);
-	LWhite_	= Color3.new(0.7,0.7,0.7);
-	LBlack_	= Color3.new(0.3,0.3,0.3);
+	Base_	= Color3.new(0.184314,0.105882,0.4431373),
+	Red_	= Color3.new(0.7,0.3,0.3),
+	Green_	= Color3.new(0.3,0.7,0.3),
+	Blue_	= Color3.new(0.3,0.3,0.7),
 	
-	Text_White_	= Color3.new(1,1,1);
-	Text_Black_	= Color3.new(0,0,0);
-	Text_Red_	= Color3.new(1,0.5,0.5);
-	Text_Green_	= Color3.new(0.5,1,0.5);
-	Text_Blue_	= Color3.new(0.5,0.5,1);
+	Text_LWhite_= Color3.new(0.7,0.7,0.7),
+	Text_LBlack_= Color3.new(0.3,0.3,0.3),
+	Text_White_	= Color3.new(1,1,1),
+	Text_Black_	= Color3.new(0,0,0),
+	Text_Red_	= Color3.new(1,0.5,0.5),
+	Text_Green_	= Color3.new(0.5,1,0.5),
+	Text_Blue_	= Color3.new(0.5,0.5,1),
 	
-	On_Color_G	= Color3.new(0, 1, 0);
-	On_Color_B	= Color3.new(0, 1, 1);
-	On_Color_Y	= Color3.new(1, 1, 0);}
+	On_Color_G	= Color3.new(0, 1, 0),
+	On_Color_B	= Color3.new(0, 1, 1),
+	On_Color_Y	= Color3.new(1, 1, 0)}
 
 local ObjectsPositions = {
-	StartFrame_Pos1 = UDim2.new(0, -50, 0.17, 0);
-	StartFrame_Pos2 = UDim2.new(0, 0, 0.17, 0);
-	MenuFrame_Pos1 = UDim2.new(0, -95, 0, 15);
-	MenuFrame_Pos2 = UDim2.new(0, 5, 0, 15);}
+	StartFrame_Pos1 = UDim2.new(0, -50, 0.17, 0),
+	StartFrame_Pos2 = UDim2.new(0, 0, 0.17, 0),
+	MenuFrame_Pos1 = UDim2.new(0, -95, 0, 15),
+	MenuFrame_Pos2 = UDim2.new(0, 5, 0, 15)}
 
 createGui = function()-----createGui-----
 
@@ -45,14 +45,14 @@ function createCorner(object,r)
 	return object
 end
 
-function createBotton(properties)
-	local botton_ = createInstance("TextButton",{BackgroundColor3=GuiColor.Base_,BackgroundTransparency=0.4,BorderSizePixel=3,
+function createButton(properties)
+	local button_ = createInstance("TextButton",{BackgroundColor3=GuiColor.Base_,BackgroundTransparency=0.4,BorderSizePixel=3,
 		AutoButtonColor=true,TextColor3=GuiColor.Text_White_,Font=Enum.Font.GothamBold,TextSize=11,TextTransparency=0,TextWrapped=false})
 	for i,v in pairs(properties) do
-		botton_[i] = v
+		button_[i] = v
 	end
-	createCorner(botton_,4)
-	return botton_
+	createCorner(button_,4)
+	return button_
 end
 
 function createTextLabel(properties)
@@ -71,12 +71,12 @@ local BForms = {
 		buTTon.Row = row
 		buTTon.Column = column
 		buTTon.Segment = segment
-	end;
+	end,
 	Position = function(buTTon)
 		local X = buTTon.Column * buTTon.GapX + (buTTon.Column - 1) * buTTon.SizeX
 		local Y = (buTTon.Row + buTTon.Segment - 1) * buTTon.GapY + (buTTon.Row - 1) * buTTon.SizeY
 		return UDim2.new(0, X, 0, Y)
-	end;
+	end,
 	Size = function(buTTon)
 		return UDim2.new(0, buTTon.SizeX, 0, buTTon.SizeY)
 	end}
@@ -86,47 +86,47 @@ local  SubsidiaryMainGUI = createInstance("ScreenGui",{DisplayOrder=0,Enabled=tr
 
 ------------------StartFrame------------------
 local StartFrame = createInstance("Frame",{Active=true, Selectable=true, Draggable=true,
-	BackgroundColor3=GuiColor.LBlack_,Transparency=1,BorderSizePixel=0,
+	BackgroundColor3=GuiColor.Text_LBlack_,Transparency=1,BorderSizePixel=0,
 	Size=UDim2.new(0, 40, 0, 15),Position=ObjectsPositions.StartFrame_Pos1,Name="StartFrame",Parent=SubsidiaryMainGUI})
 
 local HeadingFrame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transparency=1,BorderSizePixel=1,
 	Size=UDim2.new(0, 40, 0, 15),Position=UDim2.new(0, 0, 0, 0),Name="HeadingFrame",Parent=StartFrame})
 	createCorner(HeadingFrame,2)
 
-local HideMenuBotton = createBotton({Size=UDim2.new(0, 30, 0, 15),Position=UDim2.new(0, 0, 0, 0),
-	Text=">>>",Name="HideMenuBotton",Parent=HeadingFrame,TextSize=10})
+local HideMenuButton = createButton({Size=UDim2.new(0, 30, 0, 15),Position=UDim2.new(0, 0, 0, 0),
+	Text=">>>",Name="HideMenuButton",Parent=HeadingFrame,TextSize=10})
 
-local SpawnBotton = createBotton({Size=UDim2.new(0, 95, 0, 15),Position=UDim2.new(0, 35, 0, 0),
-	Text="< 0 >",Name="SpawnBotton",Parent=HeadingFrame,TextSize=10,Visible=false})	
+local SpawnButton = createButton({Size=UDim2.new(0, 95, 0, 15),Position=UDim2.new(0, 35, 0, 0),
+	Text="< 0 >",Name="SpawnButton",Parent=HeadingFrame,TextSize=10,Visible=false})	
 ------------------MenuFrame------------------
 local MenuButtonSet = {Row=1;Column=1;Segment=1;GapX=0;GapY=5;SizeX=25;SizeY=18}
 local MenuFrame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transparency=1,BorderSizePixel=0,
 	Size=UDim2.new(0, 1, 0, 1),Position=ObjectsPositions.MenuFrame_Pos1,Name="MenuFrame",Parent=StartFrame,Visible=false})
 	
 	BForms.Forms(MenuButtonSet,1,5,1)
-local DestroyBotton = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="X",Name="DestroyBotton",Parent=MenuFrame,TextSize=16,BackgroundColor3=GuiColor.Red_})
+local DestroyButton = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="X",Name="DestroyButton",Parent=MenuFrame,TextSize=16,BackgroundColor3=GuiColor.Red_})
 	BForms.Forms(MenuButtonSet,2,5,1)
-local TPMenuBotton = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="SHOP",Name="TPMenuBotton",Parent=MenuFrame,TextSize=8})
+local TPMenuButton = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="SHOP",Name="TPMenuButton",Parent=MenuFrame,TextSize=8})
 	BForms.Forms(MenuButtonSet,3,5,1)
-local TPMenuBotton2 = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="DISP",Name="TPMenuBotton2",Parent=MenuFrame,TextSize=8})
+local TPMenuButton2 = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="DISP",Name="TPMenuButton2",Parent=MenuFrame,TextSize=8})
 	BForms.Forms(MenuButtonSet,4,5,1)
-local TPMenuBotton3 = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="DRIVE",Name="TPMenuBotton3",Parent=MenuFrame,TextSize=7})
+local TPMenuButton3 = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="DRIVE",Name="TPMenuButton3",Parent=MenuFrame,TextSize=7})
 	BForms.Forms(MenuButtonSet,5,5,1)
-local TPBearBotton = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="Bear",Name="TPBearBotton",Parent=MenuFrame,TextSize=7})
+local TPBearButton = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="BEAR",Name="TPBearButton",Parent=MenuFrame,TextSize=8})
 	BForms.Forms(MenuButtonSet,6,5,1)
-local TPMatchBotton = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="Match",Name="TPMatchBotton",Parent=MenuFrame,TextSize=7})
+local TPMatchButton = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="MATCH",Name="TPMatchButton",Parent=MenuFrame,TextSize=7})
 	BForms.Forms(MenuButtonSet,7,5,1)
-local UseMenuBotton = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="Use",Name="UseMenuBotton",Parent=MenuFrame,TextSize=10})
+local UseMenuButton = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="Use",Name="UseMenuButton",Parent=MenuFrame,TextSize=10})
 	BForms.Forms(MenuButtonSet,8,5,1)
-local TimeMenuBotton = createBotton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
-	Text="Time",Name="TimeMenuBotton",Parent=MenuFrame,TextSize=10})
+local TimeMenuButton = createButton({Size=BForms.Size(MenuButtonSet),Position=BForms.Position(MenuButtonSet),
+	Text="Time",Name="TimeMenuButton",Parent=MenuFrame,TextSize=10})
 
 ------------------TP_1Frame------------------
 local ButtonSet = {Row=1;Column=1;Segment=1;GapX=0;GapY=4;SizeX=90;SizeY=18}
@@ -134,195 +134,195 @@ local TP_1Frame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transp
 	Size=UDim2.new(0, 1, 0, 1),Position=UDim2.new(0, 0, 0, 0),Name="TP_1Frame",Parent=MenuFrame,Visible=false})
 
 	BForms.Forms(ButtonSet,1,1,1)
-local NoobShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Noob Shop",Name="NoobShopBotton",Parent=TP_1Frame})
+local NoobShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Noob Shop",Name="NoobShopButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,2,1,1)
-local ProShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Pro Shop",Name="ProShopBotton",Parent=TP_1Frame})
+local ProShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Pro Shop",Name="ProShopButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,3,1,1)
-local TopShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Top Shop",Name="TopShopBotton",Parent=TP_1Frame})
+local TopShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Top Shop",Name="TopShopButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,4,1,1)
-local MentalShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Mental Shop",Name="MentalShopBotton",Parent=TP_1Frame,BackgroundColor3=GuiColor.LWhite_})
+local MentalShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Mental Shop",Name="MentalShopButton",Parent=TP_1Frame,TextColor3=GuiColor.Text_LWhite_})
 	BForms.Forms(ButtonSet,5,1,1)
-local BeeShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Bee Shop",Name="BeeShopBotton",Parent=TP_1Frame})
+local BeeShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Bee Shop",Name="BeeShopButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,6,1,1)
-local TreatShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Treat Shop",Name="TreatShopBotton",Parent=TP_1Frame})
+local TreatShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Treat Shop",Name="TreatShopButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,7,1,1)
-local TicketShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Ticket Shop",Name="TicketShopBotton",Parent=TP_1Frame})
+local TicketShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Ticket Shop",Name="TicketShopButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,8,1,1)
-local RoyalJellyShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="RoyalJelly Shop",Name="RoyalJellyShopBotton",Parent=TP_1Frame})
+local RoyalJellyShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="RoyalJelly Shop",Name="RoyalJellyShopButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,9,1,1)
-local TicketRoyalJellyBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Ticket RoyalJelly",Name="TicketRoyalJellyBotton",Parent=TP_1Frame})
+local TicketRoyalJellyButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Ticket RoyalJelly",Name="TicketRoyalJellyButton",Parent=TP_1Frame})
 	BForms.Forms(ButtonSet,10,1,1)
-local PlanterShopBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Planter Shop",Name="PlanterShopBotton",Parent=TP_1Frame,TextColor3=GuiColor.Text_Green_})
+local PlanterShopButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Planter Shop",Name="PlanterShopButton",Parent=TP_1Frame,TextColor3=GuiColor.Text_Green_})
 
 ------------------TP_2Frame------------------
 local TP_2Frame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transparency=1,BorderSizePixel=0,
 	Size=UDim2.new(0, 1, 0, 1),Position=UDim2.new(0, 0, 0, 0),Name="TP_2Frame",Parent=MenuFrame,Visible=false})
 	
 	BForms.Forms(ButtonSet,1,1,1)
-local HoneyStormBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Honey Storm",Name="HoneyStormBotton",Parent=TP_2Frame})
+local HoneyStormButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Honey Storm",Name="HoneyStormButton",Parent=TP_2Frame})
 	BForms.Forms(ButtonSet,2,1,1)
-local StrawberryDispenserBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Strawberry Disp",Name="StrawberryDispenserBotton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Red_})
+local StrawberryDispenserButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Strawberry Disp",Name="StrawberryDispenserButton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Red_})
 	BForms.Forms(ButtonSet,3,1,1)
-local BlueberryDispenserBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Blueberry Disp",Name="BlueberryDispenserBotton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Blue_})
+local BlueberryDispenserButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Blueberry Disp",Name="BlueberryDispenserButton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Blue_})
 	BForms.Forms(ButtonSet,4,1,1)
-local GlueDispenserBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Glue Dispenser",Name="GlueDispenserBotton",Parent=TP_2Frame,BackgroundColor3=GuiColor.LWhite_})
+local GlueDispenserButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Glue Dispenser",Name="GlueDispenserButton",Parent=TP_2Frame,TextColor3=GuiColor.Text_LWhite_})
 	BForms.Forms(ButtonSet,5,1,1)
-local SproutBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Sprout",Name="SproutBotton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Green_})
+local SproutButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Sprout",Name="SproutButton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Green_})
 	BForms.Forms(ButtonSet,6,1,1)
-local GumdropDispenserBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Gumdrop Disp",Name="GumdropDispenserBotton",Parent=TP_2Frame})
+local GumdropDispenserButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Gumdrop Disp",Name="GumdropDispenserButton",Parent=TP_2Frame})
 	BForms.Forms(ButtonSet,7,1,1)
-local TreatDispenserBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Treat Dispenser",Name="TreatDispenserBotton",Parent=TP_2Frame})
+local TreatDispenserButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Treat Dispenser",Name="TreatDispenserButton",Parent=TP_2Frame})
 	BForms.Forms(ButtonSet,8,1,1)
-local RedClubhouseBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Red Clubhouse",Name="RedClubhouseBotton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Red_})
+local RedClubhouseButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Red Clubhouse",Name="RedClubhouseButton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Red_})
 	BForms.Forms(ButtonSet,9,1,1)
-local BlueClubhouseBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Blue Clubhouse",Name="BlueClubhouseBotton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Blue_})
+local BlueClubhouseButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Blue Clubhouse",Name="BlueClubhouseButton",Parent=TP_2Frame,TextColor3=GuiColor.Text_Blue_})
 	BForms.Forms(ButtonSet,10,1,1)
-local ClubHoneyBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Club Honey",Name="ClubHoneyBotton",Parent=TP_2Frame})
+local ClubHoneyButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Club Honey",Name="ClubHoneyButton",Parent=TP_2Frame})
 
 ------------------TP_3Frame------------------
 local TP_3Frame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transparency=1,BorderSizePixel=0,
 	Size=UDim2.new(0, 1, 0, 1),Position=UDim2.new(0, 0, 0, 0),Name="TP_3Frame",Parent=MenuFrame,Visible=false})
 	
 	BForms.Forms(ButtonSet,1,1,1)
-local StarRoomBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Star Room",Name="StarRoomBotton",Parent=TP_3Frame})
+local StarRoomButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Star Room",Name="StarRoomButton",Parent=TP_3Frame})
 	BForms.Forms(ButtonSet,2,1,1)
-local WealthClockBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Wealth Clock",Name="WealthClockBotton",Parent=TP_3Frame})
+local WealthClockButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Wealth Clock",Name="WealthClockButton",Parent=TP_3Frame})
 	BForms.Forms(ButtonSet,3,1,1)
-local BlenderBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Blender",Name="BlenderBotton",Parent=TP_3Frame,TextColor3=GuiColor.Text_Green_})
+local BlenderButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Blender",Name="BlenderButton",Parent=TP_3Frame,TextColor3=GuiColor.Text_Green_})
 	BForms.Forms(ButtonSet,4,1,1)
-local MoonBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Moon",Name="MoonBotton",Parent=TP_3Frame,BackgroundColor3=GuiColor.LWhite_})
+local MoonButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Moon",Name="MoonButton",Parent=TP_3Frame,TextColor3=GuiColor.Text_LWhite_})
 	BForms.Forms(ButtonSet,5,1,1)
-local AntBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Ant",Name="AntBotton",Parent=TP_3Frame})
+local AntButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Ant",Name="AntButton",Parent=TP_3Frame})
 	BForms.Forms(ButtonSet,6,1,1)
-local OnettBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Onett",Name="OnettBotton",Parent=TP_3Frame})
+local OnettButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Onett",Name="OnettButton",Parent=TP_3Frame})
 	BForms.Forms(ButtonSet,7,1,1)
-local TopTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text=" ",Name="TopTPBotton",Parent=TP_3Frame})
+local TopTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text=" ",Name="TopTPButton",Parent=TP_3Frame})
 	BForms.Forms(ButtonSet,8,1,1)
-local GummyMaskBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Gummy Mask",Name="GummyMaskBotton",Parent=TP_3Frame})
+local GummyMaskButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Gummy Mask",Name="GummyMaskButton",Parent=TP_3Frame})
 	BForms.Forms(ButtonSet,9,1,1)
-local DemonmMaskBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Demonm Mask",Name="DemonmMaskBotton",Parent=TP_3Frame,TextColor3=GuiColor.Text_Red_})
+local DemonmMaskButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Demonm Mask",Name="DemonmMaskButton",Parent=TP_3Frame,TextColor3=GuiColor.Text_Red_})
 	BForms.Forms(ButtonSet,10,1,1)
-local DiamondMaskBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Diamond Mask",Name="DiamondMaskBotton",Parent=TP_3Frame,TextColor3=GuiColor.Text_Blue_})
+local DiamondMaskButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Diamond Mask",Name="DiamondMaskButton",Parent=TP_3Frame,TextColor3=GuiColor.Text_Blue_})
 
 ------------------BearFrame------------------
 local BearFrame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transparency=1,BorderSizePixel=0,
 	Size=UDim2.new(0, 1, 0, 1),Position=UDim2.new(0, 0, 0, 0),Name="BearFrame",Parent=MenuFrame,Visible=false})
 
 	BForms.Forms(ButtonSet,1,1,1)
-local PolarBearTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Polar Bear",Name="PolarBearTPBotton",Parent=BearFrame})
+local PolarBearTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Polar Bear",Name="PolarBearTPButton",Parent=BearFrame})
 	BForms.Forms(ButtonSet,2,1,1)
-local BlackBearTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Black Bear",Name="BlackBearTPBotton",Parent=BearFrame,TextColor3=GuiColor.LBlack_})
+local BlackBearTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Black Bear",Name="BlackBearTPButton",Parent=BearFrame,TextColor3=GuiColor.Text_LBlack_})
 	BForms.Forms(ButtonSet,3,1,1)
-local BrownBearTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Brown Bear",Name="BrownBearTPBotton",Parent=BearFrame,TextColor3=GuiColor.Text_Green_})
+local BrownBearTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Brown Bear",Name="BrownBearTPButton",Parent=BearFrame,TextColor3=GuiColor.Text_Green_})
 	BForms.Forms(ButtonSet,4,1,1)
-local RileyBeeTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Riley Bee",Name="RileyBeeTPBotton",Parent=BearFrame,TextColor3=GuiColor.Text_Red_})
+local RileyBeeTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Riley Bee",Name="RileyBeeTPButton",Parent=BearFrame,TextColor3=GuiColor.Text_Red_})
 	BForms.Forms(ButtonSet,5,1,1)
-local BuckoBeeTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Bucko Bee",Name="BuckoBeeTPBotton",Parent=BearFrame,TextColor3=GuiColor.Text_Blue_})
+local BuckoBeeTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Bucko Bee",Name="BuckoBeeTPButton",Parent=BearFrame,TextColor3=GuiColor.Text_Blue_})
 	BForms.Forms(ButtonSet,6,1,1)
-local StickBugTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Stick Bug",Name="StickBugTPBotton",Parent=BearFrame})
+local StickBugTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Stick Bug",Name="StickBugTPButton",Parent=BearFrame})
 	BForms.Forms(ButtonSet,7,1,1)
-local WindyShrinelTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Windy Shrinel",Name="WindyShrinelTPBotton",Parent=BearFrame,TextColor3=GuiColor.LWhite_})
+local WindyShrinelTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Windy Shrinel",Name="WindyShrinelTPButton",Parent=BearFrame,TextColor3=GuiColor.Text_LWhite_})
 	BForms.Forms(ButtonSet,8,1,1)
-local KingBeetleTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="King Beetle",Name="KingBeetleTPBotton",Parent=BearFrame})
+local KingBeetleTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="King Beetle",Name="KingBeetleTPButton",Parent=BearFrame})
 	BForms.Forms(ButtonSet,9,1,1)
-local TunnelBearTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Tunnel Bear",Name="TunnelBearTPBotton",Parent=BearFrame})
+local TunnelBearTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Tunnel Bear",Name="TunnelBearTPButton",Parent=BearFrame})
 	BForms.Forms(ButtonSet,10,1,1)
-local SnailTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Snail",Name="SnailTPBotton",Parent=BearFrame})
+local SnailTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Snail",Name="SnailTPButton",Parent=BearFrame})
 	BForms.Forms(ButtonSet,11,1,1)
-local ComandorTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Comandor",Name="ComandorTPBotton",Parent=BearFrame})
+local ComandorTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Comandor",Name="ComandorTPButton",Parent=BearFrame})
 
 ------------------MatchFrame------------------
 local MatchFrame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transparency=1,BorderSizePixel=0,
 	Size=UDim2.new(0, 1, 0, 1),Position=UDim2.new(0, 0, 0, 0),Name="MatchFrame",Parent=MenuFrame,Visible=false})
 
 	BForms.Forms(ButtonSet,1,1,1)
-local NightMatchTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="NightMatch",Name="NightMatchTPBotton",Parent=MatchFrame})
+local NightMatchTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="NightMatch",Name="NightMatchTPButton",Parent=MatchFrame})
 	BForms.Forms(ButtonSet,2,1,1)
-local ExtremeMatchTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="ExtremeMatch",Name="ExtremeMatchTPBotton",Parent=MatchFrame})
+local ExtremeMatchTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="ExtremeMatch",Name="ExtremeMatchTPButton",Parent=MatchFrame})
 	BForms.Forms(ButtonSet,3,1,1)
-local MegaMatchTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="MegaMatch",Name="MegaMatchTPBotton",Parent=MatchFrame})
+local MegaMatchTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="MegaMatch",Name="MegaMatchTPButton",Parent=MatchFrame})
 	BForms.Forms(ButtonSet,4,1,1)
-local MemoryMatchTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="MemoryMatch",Name="MemoryMatchTPBotton",Parent=MatchFrame})
+local MemoryMatchTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="MemoryMatch",Name="MemoryMatchTPButton",Parent=MatchFrame})
 	BForms.Forms(ButtonSet,5,1,1)
-local HoneyConvertor1TPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Convertor1",Name="HoneyConvertor1TPBotton",Parent=MatchFrame})
+local HoneyConvertor1TPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Convertor1",Name="HoneyConvertor1TPButton",Parent=MatchFrame,TextColor3=GuiColor.Text_LWhite_})
 	BForms.Forms(ButtonSet,6,1,1)
-local HoneyConvertor2TPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Convertor2",Name="HoneyConvertor2TPBotton",Parent=MatchFrame})
+local HoneyConvertor2TPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Convertor2",Name="HoneyConvertor2TPButton",Parent=MatchFrame,TextColor3=GuiColor.Text_LWhite_})
 	BForms.Forms(ButtonSet,7,1,1)
-local HoneyConvertor3TPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Convertor3",Name="HoneyConvertor3TPBotton",Parent=MatchFrame})
+local HoneyConvertor3TPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Convertor3",Name="HoneyConvertor3TPButton",Parent=MatchFrame,TextColor3=GuiColor.Text_LWhite_})
 	BForms.Forms(ButtonSet,8,1,1)
-local CoconutDispenserTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Coconut Disp",Name="CoconutDispenserTPBotton",Parent=MatchFrame})
+local CoconutDispenserTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Coconut Disp",Name="CoconutDispenserTPButton",Parent=MatchFrame})
 	BForms.Forms(ButtonSet,9,1,1)
-local RedFieldBoostTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Red Boost",Name="RedFieldBoostTPBotton",Parent=MatchFrame})
+local RedFieldBoostTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Red Boost",Name="RedFieldBoostTPButton",Parent=MatchFrame,TextColor3=GuiColor.Text_Red_})
 	BForms.Forms(ButtonSet,10,1,1)
-local BlueFieldBoostTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Blue Boost",Name="BlueFieldBoostTPBotton",Parent=MatchFrame})
+local BlueFieldBoostTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Blue Boost",Name="BlueFieldBoostTPButton",Parent=MatchFrame,TextColor3=GuiColor.Text_Blue_})
 	BForms.Forms(ButtonSet,11,1,1)
-local MountainTopBoostTPBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="White Boost",Name="MountainTopBoostTPBotton",Parent=MatchFrame})
+local MountainTopBoostTPButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="White Boost",Name="MountainTopBoostTPButton",Parent=MatchFrame})
 
 ------------------UseFrame------------------
 local UseFrame = createInstance("Frame",{BackgroundColor3=GuiColor.Base_,Transparency=1,BorderSizePixel=0,
 	Size=UDim2.new(0, 1, 0, 1),Position=UDim2.new(0, 0, 0, 0),Name="UseFrame",Parent=MenuFrame,Visible=false})
 
 	BForms.Forms(ButtonSet,1,1,1)
-local AutoCloudBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Cloud",Name="AutoCloudBotton",Parent=UseFrame})
+local AutoCloudButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Cloud",Name="AutoCloudButton",Parent=UseFrame})
 	BForms.Forms(ButtonSet,2,1,1)
-local AutoJellyBeans = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="Jelly Beans",Name="AutoJellyBeans",Parent=UseFrame})
+local AutoJellyBeansButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="Jelly Beans",Name="AutoJellyBeansButton",Parent=UseFrame})
 	BForms.Forms(ButtonSet,3,1,1)
-local AutoMagicBeanBotton = createBotton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
-	Text="MagicBean",Name="AutoMagicBeanBotton",Parent=UseFrame,TextColor3=GuiColor.Text_Green_})
+local AutoMagicBeanButton = createButton({Size=BForms.Size(ButtonSet),Position=BForms.Position(ButtonSet),
+	Text="MagicBean",Name="AutoMagicBeanButton",Parent=UseFrame,TextColor3=GuiColor.Text_Green_})
 
 ------------------TimeFrame------------------
 local TimeSet = {Row=1;Column=1;Segment=1;GapX=10;GapY=4;SizeX=60;SizeY=18}
@@ -347,12 +347,12 @@ local TextDay = createTextLabel({Size=BForms.Size(TimeSet),Position=BForms.Posit
 	Text = "Pollen: in day",Name="TextDay",Parent=TimeFrame})
 
 	BForms.Forms(TimeSet,5,1,3)
-local StartStopBotton = createBotton({Size=BForms.Size(TimeSet),Position=BForms.Position(TimeSet),
-	Text="Start",Name="StartStopBotton",Parent=TimeFrame})
+local StartStopButton = createButton({Size=BForms.Size(TimeSet),Position=BForms.Position(TimeSet),
+	Text="Start",Name="StartStopButton",Parent=TimeFrame})
 
 	BForms.Forms(TimeSet,6,1,3)
-local ResetBotton = createBotton({Size=BForms.Size(TimeSet),Position=BForms.Position(TimeSet),
-	Text="Reset",Name="ResetBotton",Parent=TimeFrame})
+local ResetButton = createButton({Size=BForms.Size(TimeSet),Position=BForms.Position(TimeSet),
+	Text="Reset",Name="ResetButton",Parent=TimeFrame})
 
 return SubsidiaryMainGUI
 end
@@ -360,7 +360,7 @@ end
 local S_U_B_S_I_D_I_A_R_Y_Gui = createGui()
 local StartFrame = S_U_B_S_I_D_I_A_R_Y_Gui:WaitForChild("StartFrame")
 local HeadingFrame = StartFrame:WaitForChild("HeadingFrame")
-local HideMenuBotton = HeadingFrame:WaitForChild("HideMenuBotton")
+local HideMenuButton = HeadingFrame:WaitForChild("HideMenuButton")
 local MenuFrame = StartFrame:WaitForChild("MenuFrame")
 local TP_1Frame = MenuFrame:WaitForChild("TP_1Frame")
 local TP_2Frame = MenuFrame:WaitForChild("TP_2Frame")
@@ -382,25 +382,25 @@ end)
 
 spawn(function()-----MenuFrame, HeadingFrame-----
 
-local SpawnBotton = HeadingFrame:WaitForChild("SpawnBotton")
+local SpawnButton = HeadingFrame:WaitForChild("SpawnButton")
 
-HideMenuBotton.MouseButton1Up:connect(function()
-	if	HideMenuBotton.Text == ">>>" then
-		HideMenuBotton.Text = "<<<"
+HideMenuButton.MouseButton1Up:connect(function()
+	if	HideMenuButton.Text == ">>>" then
+		HideMenuButton.Text = "<<<"
 		MenuFrame.Visible = true
-		SpawnBotton.Visible = true
+		SpawnButton.Visible = true
 		StartFrame.Size=UDim2.new(0, 135, 0, 15)
 		HeadingFrame.Size=UDim2.new(0, 135, 0, 15)
 	else
-		HideMenuBotton.Text = ">>>"
+		HideMenuButton.Text = ">>>"
 		MenuFrame.Visible = false
-		SpawnBotton.Visible = false
+		SpawnButton.Visible = false
 		StartFrame.Size=UDim2.new(0, 40, 0, 15)
 		HeadingFrame.Size=UDim2.new(0, 40, 0, 15)
 	end
 end)
 
-SpawnBotton.MouseButton1Up:connect(function()
+SpawnButton.MouseButton1Up:connect(function()
 	humanoidRootPart = workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart
 	humanoidRootPart.CFrame = game.Players.LocalPlayer.SpawnPos.Value
 	wait(1)
@@ -408,16 +408,16 @@ SpawnBotton.MouseButton1Up:connect(function()
 end)
 
 
-local DestroyBotton = MenuFrame:WaitForChild("DestroyBotton")
-local TPMenuBotton = MenuFrame:WaitForChild("TPMenuBotton")
-local TPMenuBotton2 = MenuFrame:WaitForChild("TPMenuBotton2")
-local TPMenuBotton3 = MenuFrame:WaitForChild("TPMenuBotton3")
-local TPBearBotton = MenuFrame:WaitForChild("TPBearBotton")
-local TPMatchBotton = MenuFrame:WaitForChild("TPMatchBotton")
-local UseMenuBotton = MenuFrame:WaitForChild("UseMenuBotton")
-local TimeMenuBotton = MenuFrame:WaitForChild("TimeMenuBotton")
+local DestroyButton = MenuFrame:WaitForChild("DestroyButton")
+local TPMenuButton = MenuFrame:WaitForChild("TPMenuButton")
+local TPMenuButton2 = MenuFrame:WaitForChild("TPMenuButton2")
+local TPMenuButton3 = MenuFrame:WaitForChild("TPMenuButton3")
+local TPBearButton = MenuFrame:WaitForChild("TPBearButton")
+local TPMatchButton = MenuFrame:WaitForChild("TPMatchButton")
+local UseMenuButton = MenuFrame:WaitForChild("UseMenuButton")
+local TimeMenuButton = MenuFrame:WaitForChild("TimeMenuButton")
 
-DestroyBotton.MouseButton1Up:connect(function()
+DestroyButton.MouseButton1Up:connect(function()
 	allStop = true
 	S_U_B_S_I_D_I_A_R_Y_Gui:Destroy()
 end)
@@ -440,7 +440,7 @@ local function displayFrame(button, frame)
 			Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .2, true)
 	else
 		hideFrames()
-			DestroyBotton.BackgroundColor3=GuiColor.Red_
+			DestroyButton.BackgroundColor3=GuiColor.Red_
 		frame.Visible = true
 		button.BackgroundColor3 = GuiColor.On_Color_B
 		MenuFrame:TweenPosition(ObjectsPositions.MenuFrame_Pos2,
@@ -448,147 +448,147 @@ local function displayFrame(button, frame)
 	end
 end
 
-TPMenuBotton.MouseButton1Up:Connect(function()displayFrame(TPMenuBotton,TP_1Frame)end)
-TPMenuBotton2.MouseButton1Up:Connect(function()displayFrame(TPMenuBotton2,TP_2Frame)end)
-TPMenuBotton3.MouseButton1Up:Connect(function()displayFrame(TPMenuBotton3,TP_3Frame)end)
-TPBearBotton.MouseButton1Up:Connect(function()displayFrame(TPBearBotton,BearFrame)end)
-TPMatchBotton.MouseButton1Up:Connect(function()displayFrame(TPMatchBotton,MatchFrame)end)
-UseMenuBotton.MouseButton1Up:Connect(function()displayFrame(UseMenuBotton,UseFrame)end)
-TimeMenuBotton.MouseButton1Up:Connect(function()displayFrame(TimeMenuBotton,TimeFrame)end)
+TPMenuButton.MouseButton1Up:Connect(function()displayFrame(TPMenuButton,TP_1Frame)end)
+TPMenuButton2.MouseButton1Up:Connect(function()displayFrame(TPMenuButton2,TP_2Frame)end)
+TPMenuButton3.MouseButton1Up:Connect(function()displayFrame(TPMenuButton3,TP_3Frame)end)
+TPBearButton.MouseButton1Up:Connect(function()displayFrame(TPBearButton,BearFrame)end)
+TPMatchButton.MouseButton1Up:Connect(function()displayFrame(TPMatchButton,MatchFrame)end)
+UseMenuButton.MouseButton1Up:Connect(function()displayFrame(UseMenuButton,UseFrame)end)
+TimeMenuButton.MouseButton1Up:Connect(function()displayFrame(TimeMenuButton,TimeFrame)end)
 
 end)
 
 spawn(function()-----TP_1Frame-----
 
-local NoobShopBotton = TP_1Frame:WaitForChild("NoobShopBotton")
-local ProShopBotton = TP_1Frame:WaitForChild("ProShopBotton")
-local TopShopBotton = TP_1Frame:WaitForChild("TopShopBotton")
-local MentalShopBotton = TP_1Frame:WaitForChild("MentalShopBotton")
-local BeeShopBotton = TP_1Frame:WaitForChild("BeeShopBotton")
-local TreatShopBotton = TP_1Frame:WaitForChild("TreatShopBotton")
-local TicketShopBotton = TP_1Frame:WaitForChild("TicketShopBotton")
-local RoyalJellyShopBotton = TP_1Frame:WaitForChild("RoyalJellyShopBotton")
-local TicketRoyalJellyBotton = TP_1Frame:WaitForChild("TicketRoyalJellyBotton")
-local PlanterShopBotton = TP_1Frame:WaitForChild("PlanterShopBotton")
+local NoobShopButton = TP_1Frame:WaitForChild("NoobShopButton")
+local ProShopButton = TP_1Frame:WaitForChild("ProShopButton")
+local TopShopButton = TP_1Frame:WaitForChild("TopShopButton")
+local MentalShopButton = TP_1Frame:WaitForChild("MentalShopButton")
+local BeeShopButton = TP_1Frame:WaitForChild("BeeShopButton")
+local TreatShopButton = TP_1Frame:WaitForChild("TreatShopButton")
+local TicketShopButton = TP_1Frame:WaitForChild("TicketShopButton")
+local RoyalJellyShopButton = TP_1Frame:WaitForChild("RoyalJellyShopButton")
+local TicketRoyalJellyButton = TP_1Frame:WaitForChild("TicketRoyalJellyButton")
+local PlanterShopButton = TP_1Frame:WaitForChild("PlanterShopButton")
 
-NoobShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Tool Shop"] end)
-ProShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Tool Shop 2"] end)
-TopShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["MountainTop Shop"] end)
-MentalShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Mental Shop"] end)
-BeeShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Bee Shop"] end)
-TreatShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Treat Shop"] end)
-TicketShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Ticket Shop"] end)
-RoyalJellyShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["RoyalJelly Shop"] end)
-TicketRoyalJellyBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Ticket RoyalJelly Shop"] end)
-PlanterShopBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Planter Shop"] end)
+NoobShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Tool Shop"] end)
+ProShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Tool Shop 2"] end)
+TopShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["MountainTop Shop"] end)
+MentalShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Mental Shop"] end)
+BeeShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Bee Shop"] end)
+TreatShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Treat Shop"] end)
+TicketShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Ticket Shop"] end)
+RoyalJellyShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["RoyalJelly Shop"] end)
+TicketRoyalJellyButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Ticket RoyalJelly Shop"] end)
+PlanterShopButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Planter Shop"] end)
 
 end)
 
 spawn(function()-----TP_2Frame-----
 
-local HoneyStormBotton = TP_2Frame:WaitForChild("HoneyStormBotton")
-local StrawberryDispenserBotton = TP_2Frame:WaitForChild("StrawberryDispenserBotton")
-local BlueberryDispenserBotton = TP_2Frame:WaitForChild("BlueberryDispenserBotton")
-local GlueDispenserBotton = TP_2Frame:WaitForChild("GlueDispenserBotton")
-local SproutBotton = TP_2Frame:WaitForChild("SproutBotton")
-local GumdropDispenserBotton = TP_2Frame:WaitForChild("GumdropDispenserBotton")
-local TreatDispenserBotton = TP_2Frame:WaitForChild("TreatDispenserBotton")
-local RedClubhouseBotton = TP_2Frame:WaitForChild("RedClubhouseBotton")
-local BlueClubhouseBotton = TP_2Frame:WaitForChild("BlueClubhouseBotton")
-local ClubHoneyBotton = TP_2Frame:WaitForChild("ClubHoneyBotton")
+local HoneyStormButton = TP_2Frame:WaitForChild("HoneyStormButton")
+local StrawberryDispenserButton = TP_2Frame:WaitForChild("StrawberryDispenserButton")
+local BlueberryDispenserButton = TP_2Frame:WaitForChild("BlueberryDispenserButton")
+local GlueDispenserButton = TP_2Frame:WaitForChild("GlueDispenserButton")
+local SproutButton = TP_2Frame:WaitForChild("SproutButton")
+local GumdropDispenserButton = TP_2Frame:WaitForChild("GumdropDispenserButton")
+local TreatDispenserButton = TP_2Frame:WaitForChild("TreatDispenserButton")
+local RedClubhouseButton = TP_2Frame:WaitForChild("RedClubhouseButton")
+local BlueClubhouseButton = TP_2Frame:WaitForChild("BlueClubhouseButton")
+local ClubHoneyButton = TP_2Frame:WaitForChild("ClubHoneyButton")
 
-HoneyStormBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honeystorm Dispensor"] end)
-StrawberryDispenserBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Strawberry Dispenser"] end)
-BlueberryDispenserBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Blueberry Dispenser"] end)
-GlueDispenserBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Glue Dispenser"] end)
-SproutBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Sprout Dispenser"] end)
-GumdropDispenserBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Gumdrop Dispenser"] end)
-TreatDispenserBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Treat Dispenser"] end)
-RedClubhouseBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Red Clubhouse"] end)
-BlueClubhouseBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Blue Clubhouse"] end)
-ClubHoneyBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Club Honey"] end)
+HoneyStormButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honeystorm Dispensor"] end)
+StrawberryDispenserButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Strawberry Dispenser"] end)
+BlueberryDispenserButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Blueberry Dispenser"] end)
+GlueDispenserButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Glue Dispenser"] end)
+SproutButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Sprout Dispenser"] end)
+GumdropDispenserButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Gumdrop Dispenser"] end)
+TreatDispenserButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Treat Dispenser"] end)
+RedClubhouseButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Red Clubhouse"] end)
+BlueClubhouseButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Blue Clubhouse"] end)
+ClubHoneyButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Club Honey"] end)
 
 end)
 
 spawn(function()-----TP_3Frame-----
 
-local StarRoomBotton = TP_3Frame:WaitForChild("StarRoomBotton")
-local WealthClockBotton = TP_3Frame:WaitForChild("WealthClockBotton")
-local BlenderBotton = TP_3Frame:WaitForChild("BlenderBotton")
-local MoonBotton = TP_3Frame:WaitForChild("MoonBotton")
-local AntBotton = TP_3Frame:WaitForChild("AntBotton")
-local OnettBotton = TP_3Frame:WaitForChild("OnettBotton")
-local TopTPBotton = TP_3Frame:WaitForChild("TopTPBotton")
-local GummyMaskBotton = TP_3Frame:WaitForChild("GummyMaskBotton")
-local DemonmMaskBotton = TP_3Frame:WaitForChild("DemonmMaskBotton")
-local DiamondMaskBotton = TP_3Frame:WaitForChild("DiamondMaskBotton")
+local StarRoomButton = TP_3Frame:WaitForChild("StarRoomButton")
+local WealthClockButton = TP_3Frame:WaitForChild("WealthClockButton")
+local BlenderButton = TP_3Frame:WaitForChild("BlenderButton")
+local MoonButton = TP_3Frame:WaitForChild("MoonButton")
+local AntButton = TP_3Frame:WaitForChild("AntButton")
+local OnettButton = TP_3Frame:WaitForChild("OnettButton")
+local TopTPButton = TP_3Frame:WaitForChild("TopTPButton")
+local GummyMaskButton = TP_3Frame:WaitForChild("GummyMaskButton")
+local DemonmMaskButton = TP_3Frame:WaitForChild("DemonmMaskButton")
+local DiamondMaskButton = TP_3Frame:WaitForChild("DiamondMaskButton")
 
-StarRoomBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Star Room"] end)
-WealthClockBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Wealth Clock"] end)
-BlenderBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Blender"] end)
-MoonBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Moon"] end)
-AntBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Ant"] end)
-OnettBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Onett"] end)
-TopTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Top"] end)
-GummyMaskBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Gummy Mask"] end)
-DiamondMaskBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Diamond Mask"] end)
-DemonmMaskBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Demonm Mask"] end)
+StarRoomButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Star Room"] end)
+WealthClockButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Wealth Clock"] end)
+BlenderButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Blender"] end)
+MoonButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Moon"] end)
+AntButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Ant"] end)
+OnettButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Onett"] end)
+TopTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Top"] end)
+GummyMaskButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Gummy Mask"] end)
+DiamondMaskButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Diamond Mask"] end)
+DemonmMaskButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Demonm Mask"] end)
 
 end)
 
 spawn(function()-----BearFrame-----
 
-local PolarBearTPBotton = BearFrame:WaitForChild("PolarBearTPBotton")
-local BlackBearTPBotton = BearFrame:WaitForChild("BlackBearTPBotton")
-local BrownBearTPBotton = BearFrame:WaitForChild("BrownBearTPBotton")
-local RileyBeeTPBotton = BearFrame:WaitForChild("RileyBeeTPBotton")
-local BuckoBeeTPBotton = BearFrame:WaitForChild("BuckoBeeTPBotton")
-local StickBugTPBotton = BearFrame:WaitForChild("StickBugTPBotton")
-local WindyShrinelTPBotton = BearFrame:WaitForChild("WindyShrinelTPBotton")
-local KingBeetleTPBotton = BearFrame:WaitForChild("KingBeetleTPBotton")
-local TunnelBearTPBotton = BearFrame:WaitForChild("TunnelBearTPBotton")
-local SnailTPBotton = BearFrame:WaitForChild("SnailTPBotton")
-local ComandorTPBotton = BearFrame:WaitForChild("ComandorTPBotton")
+local PolarBearTPButton = BearFrame:WaitForChild("PolarBearTPButton")
+local BlackBearTPButton = BearFrame:WaitForChild("BlackBearTPButton")
+local BrownBearTPButton = BearFrame:WaitForChild("BrownBearTPButton")
+local RileyBeeTPButton = BearFrame:WaitForChild("RileyBeeTPButton")
+local BuckoBeeTPButton = BearFrame:WaitForChild("BuckoBeeTPButton")
+local StickBugTPButton = BearFrame:WaitForChild("StickBugTPButton")
+local WindyShrinelTPButton = BearFrame:WaitForChild("WindyShrinelTPButton")
+local KingBeetleTPButton = BearFrame:WaitForChild("KingBeetleTPButton")
+local TunnelBearTPButton = BearFrame:WaitForChild("TunnelBearTPButton")
+local SnailTPButton = BearFrame:WaitForChild("SnailTPButton")
+local ComandorTPButton = BearFrame:WaitForChild("ComandorTPButton")
 
-PolarBearTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Polar Bear"] end)
-BlackBearTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Black Bear"] end)
-BrownBearTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Brown Bear"] end)
-RileyBeeTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Riley Bee"] end)
-BuckoBeeTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Bucko Bee"] end)
-StickBugTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Stick Bug"] end)
-WindyShrinelTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Windy Shrine"] end)
-KingBeetleTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["King Beetle"] end)
-TunnelBearTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Tunnel Bear"] end)
-SnailTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Snail"] end)
-ComandorTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Comandor"] end)
+PolarBearTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Polar Bear"] end)
+BlackBearTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Black Bear"] end)
+BrownBearTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Brown Bear"] end)
+RileyBeeTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Riley Bee"] end)
+BuckoBeeTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Bucko Bee"] end)
+StickBugTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Stick Bug"] end)
+WindyShrinelTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Windy Shrine"] end)
+KingBeetleTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["King Beetle"] end)
+TunnelBearTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Tunnel Bear"] end)
+SnailTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Snail"] end)
+ComandorTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Comandor"] end)
 
 end)
 
 spawn(function()-----MatchFrame-----
 
-local NightMatchTPBotton = MatchFrame:WaitForChild("NightMatchTPBotton")
-local ExtremeMatchTPBotton = MatchFrame:WaitForChild("ExtremeMatchTPBotton")
-local MegaMatchTPBotton = MatchFrame:WaitForChild("MegaMatchTPBotton")
-local MemoryMatchTPBotton = MatchFrame:WaitForChild("MemoryMatchTPBotton")
-local HoneyConvertor1TPBotton = MatchFrame:WaitForChild("HoneyConvertor1TPBotton")
-local HoneyConvertor2TPBotton = MatchFrame:WaitForChild("HoneyConvertor2TPBotton")
-local HoneyConvertor3TPBotton = MatchFrame:WaitForChild("HoneyConvertor3TPBotton")
-local CoconutDispenserTPBotton = MatchFrame:WaitForChild("CoconutDispenserTPBotton")
-local RedFieldBoostTPBotton = MatchFrame:WaitForChild("RedFieldBoostTPBotton")
-local BlueFieldBoostTPBotton = MatchFrame:WaitForChild("BlueFieldBoostTPBotton")
-local MountainTopBoostTPBotton = MatchFrame:WaitForChild("MountainTopBoostTPBotton")
+local NightMatchTPButton = MatchFrame:WaitForChild("NightMatchTPButton")
+local ExtremeMatchTPButton = MatchFrame:WaitForChild("ExtremeMatchTPButton")
+local MegaMatchTPButton = MatchFrame:WaitForChild("MegaMatchTPButton")
+local MemoryMatchTPButton = MatchFrame:WaitForChild("MemoryMatchTPButton")
+local HoneyConvertor1TPButton = MatchFrame:WaitForChild("HoneyConvertor1TPButton")
+local HoneyConvertor2TPButton = MatchFrame:WaitForChild("HoneyConvertor2TPButton")
+local HoneyConvertor3TPButton = MatchFrame:WaitForChild("HoneyConvertor3TPButton")
+local CoconutDispenserTPButton = MatchFrame:WaitForChild("CoconutDispenserTPButton")
+local RedFieldBoostTPButton = MatchFrame:WaitForChild("RedFieldBoostTPButton")
+local BlueFieldBoostTPButton = MatchFrame:WaitForChild("BlueFieldBoostTPButton")
+local MountainTopBoostTPButton = MatchFrame:WaitForChild("MountainTopBoostTPButton")
 
-NightMatchTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Night Match"] end)
-ExtremeMatchTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Extreme Match"] end)
-MegaMatchTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Mega Match"] end)
-MemoryMatchTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Memory Match"] end)
-HoneyConvertor1TPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honey Convertor 1"] end)
-HoneyConvertor2TPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honey Convertor 2"] end)
-HoneyConvertor3TPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honey Convertor 3"] end)
-CoconutDispenserTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Coconut Dispenser"] end)
-RedFieldBoostTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Redfield Boost"] end)
-BlueFieldBoostTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Bluefield Boost"] end)
-MountainTopBoostTPBotton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["MountainTop Boost"] end)
+NightMatchTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Night Match"] end)
+ExtremeMatchTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Extreme Match"] end)
+MegaMatchTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Mega Match"] end)
+MemoryMatchTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Memory Match"] end)
+HoneyConvertor1TPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honey Convertor 1"] end)
+HoneyConvertor2TPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honey Convertor 2"] end)
+HoneyConvertor3TPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Honey Convertor 3"] end)
+CoconutDispenserTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Coconut Dispenser"] end)
+RedFieldBoostTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Redfield Boost"] end)
+BlueFieldBoostTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Bluefield Boost"] end)
+MountainTopBoostTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["MountainTop Boost"] end)
 
 end)
 
@@ -651,55 +651,55 @@ Waypoints = {-----Waypoints-----
 ["Comandor"] = CFrame.new(520.7, 47, 162),
 }
 
+local ButtonState = {
+	ButtonOnOff = function (button)
+		if	button.BackgroundColor3 == GuiColor.Base_ then
+			button.BackgroundColor3 = GuiColor.On_Color_G
+			return true
+		else
+			button.AutoButtonColor = false
+			button.BackgroundColor3 = GuiColor.Text_LBlack_
+			return false
+		end
+	end,
+	ButtonActivation = function (button)
+		button.AutoButtonColor = true
+		button.BackgroundColor3 = GuiColor.Base_
+	end,
+	LaunchPeriod = function (button, second)
+		for i = 1, math.floor(second) do
+			if	not button.AutoButtonColor or allStop then
+				return false
+			end
+			wait(1)
+		end
+		return true
+	end}
+
 spawn(function()-----UseFrame-----
 
-local AutoCloudBotton = UseFrame:WaitForChild("AutoCloudBotton")
-local AutoJellyBeans = UseFrame:WaitForChild("AutoJellyBeans")
-local AutoMagicBeanBotton = UseFrame:WaitForChild("AutoMagicBeanBotton")
+local AutoCloudButton = UseFrame:WaitForChild("AutoCloudButton")
+local AutoJellyBeansButton = UseFrame:WaitForChild("AutoJellyBeansButton")
+local AutoMagicBeanButton = UseFrame:WaitForChild("AutoMagicBeanButton")
 
-AutoCloudBotton.MouseButton1Up:Connect(function()
-	if	AutoCloudBotton.BackgroundColor3 == GuiColor.Base_ then
-		AutoCloudBotton.BackgroundColor3 = GuiColor.On_Color_G
-		while AutoCloudBotton.BackgroundColor3 == GuiColor.On_Color_G and trackingFunctionIs do	
-			local A_1 = {["Name"] = "Cloud Vial"}
-			local Event = game:GetService("ReplicatedStorage").Events.PlayerActivesCommand
-			Event:FireServer(A_1)
-			wait(2)
-			Event:FireServer(A_1)
-			wait(180)
-		end
-	else
-		AutoCloudBotton.BackgroundColor3 = GuiColor.Base_
+local function triggeringEvent(button,comand,count,delay)
+	if not ButtonState.ButtonOnOff(button) then return end
+	local A_1 = {["Name"] = comand}
+	local Event = game:GetService("ReplicatedStorage").Events.PlayerActivesCommand
+	Event:FireServer(A_1)
+	for i = 1, count-1 do
+		if	not ButtonState.LaunchPeriod(button, delay) then break end
+		Event:FireServer(A_1)
 	end
-end)
+	ButtonState.ButtonActivation(button)
+end
 
-AutoJellyBeans.MouseButton1Up:Connect(function()
-	if	AutoJellyBeans.BackgroundColor3 == GuiColor.Base_ then
-		AutoJellyBeans.BackgroundColor3 = GuiColor.On_Color_G
-		while AutoJellyBeans.BackgroundColor3 == GuiColor.On_Color_G and trackingFunctionIs do	
-			local A_1 = {["Name"] = "Jelly Beans"}
-			local Event = game:GetService("ReplicatedStorage").Events.PlayerActivesCommand
-			Event:FireServer(A_1)
-			wait(50)
-		end
-	else
-		AutoJellyBeans.BackgroundColor3 = GuiColor.Base_
-	end
-end)
-
-AutoMagicBeanBotton.MouseButton1Up:Connect(function()
-	if AutoMagicBeanBotton.BackgroundColor3 == GuiColor.Base_ and trackingFunctionIs then
-		AutoMagicBeanBotton.BackgroundColor3 = GuiColor.On_Color_G
-		while AutoMagicBeanBotton.BackgroundColor3 == GuiColor.On_Color_G and trackingFunctionIs do	
-			local A = {["Name"] = "Magic Bean"}
-			local Event = game:GetService("ReplicatedStorage").Events.PlayerActivesCommand
-			Event:FireServer(A)
-			wait(10)
-		end
-	else
-		AutoMagicBeanBotton.BackgroundColor3 = GuiColor.Base_
-	end
-end)
+AutoCloudButton.MouseButton1Up:Connect(function()
+	triggeringEvent(AutoCloudButton,"Cloud Vial",10,90)end)
+AutoJellyBeansButton.MouseButton1Up:Connect(function()
+	triggeringEvent(AutoJellyBeansButton,"Jelly Beans",19,50)end)
+AutoMagicBeanButton.MouseButton1Up:Connect(function()
+	triggeringEvent(AutoMagicBeanButton,"Magic Bean",10,10)end)
 
 end)
 
@@ -709,13 +709,11 @@ local TextHoney = TimeFrame:WaitForChild("TextHoney")
 local TextTime = TimeFrame:WaitForChild("TextTime")
 local TextHour = TimeFrame:WaitForChild("TextHour")
 local TextDay = TimeFrame:WaitForChild("TextDay")
-local StartStopBotton = TimeFrame:WaitForChild("StartStopBotton")
-local ResetBotton = TimeFrame:WaitForChild("ResetBotton")
+local StartStopButton = TimeFrame:WaitForChild("StartStopButton")
+local ResetButton = TimeFrame:WaitForChild("ResetButton")
 
-StartStopBotton.MouseButton1Up:Connect(function()
---print(game.Players.LocalPlayer.CoreStats.Pollen.Value)
---print(os.date("%H",3777)..":"..os.date("%M",3777)..":"..os.date("%S",3777))
---print((os.date("%H",7)-2)..":"..os.date("%M",7)..":"..os.date("%S",7))
+StartStopButton.MouseButton1Up:Connect(function()
+
 local function formatNumber(number)
 	local power = 0
 	local letter = ""
@@ -745,46 +743,43 @@ local function formatNumber(number)
 	return tostring(number)..letter
 end
 
-	if	StartStopBotton.BackgroundColor3 == GuiColor.Base_ then
-		local timeStart_ = os.time()
-		local timeDelta_ = 0
-		local honeyStart_ = game.Players.LocalPlayer.CoreStats.Honey.Value
-		local honeyDelta_ = 0
-		StartStopBotton.Text = "Stop"
-		StartStopBotton.BackgroundColor3 = GuiColor.On_Color_Y
-		while StartStopBotton.AutoButtonColor do
-			TextHoney.Text = formatNumber(honeyDelta_)
-			TextTime.Text = ((os.date("%H",timeDelta_)-2)..":"..os.date("%M",timeDelta_)..":"..os.date("%S",timeDelta_))--os.date("%X",timeDelta_)
-			TextHour.Text = formatNumber((honeyDelta_*3600)/timeDelta_).." in hout"
-			TextDay.Text = formatNumber((honeyDelta_*3600*24)/timeDelta_).." in day"
-			repeat
-				if	allStop then return end
-				wait(1)
-			until HideMenuBotton.Text == "<<<"
-			timeDelta_ = os.time() - timeStart_
-			honeyDelta_ = game.Players.LocalPlayer.CoreStats.Honey.Value - honeyStart_
-		end
-		StartStopBotton.Text = "Start"
-		StartStopBotton.AutoButtonColor = true
-		StartStopBotton.BackgroundColor3 = GuiColor.Base_
-	else
-		StartStopBotton.AutoButtonColor = false
-		StartStopBotton.BackgroundColor3 = GuiColor.LBlack_
+	if not ButtonState.ButtonOnOff(StartStopButton) then return end
+	local timeStart_ = os.time()
+	local timeZone = os.date("%z")
+	local hoursOffset = tonumber(timeZone:sub(1,3))
+	local timeDelta_ = 0
+	local honeyStart_ = game.Players.LocalPlayer.CoreStats.Honey.Value
+	local honeyDelta_ = 0
+	StartStopButton.Text = "Stop"
+	StartStopButton.BackgroundColor3 = GuiColor.On_Color_Y
+	while StartStopButton.AutoButtonColor do
+		TextHoney.Text = formatNumber(honeyDelta_)
+		TextTime.Text = ((os.date("%H",timeDelta_)-hoursOffset)..":"..os.date("%M",timeDelta_)..":"..os.date("%S",timeDelta_))
+		TextHour.Text = formatNumber((honeyDelta_*3600)/timeDelta_).." in hout"
+		TextDay.Text = formatNumber((honeyDelta_*3600*24)/timeDelta_).." in day"
+		repeat
+			if	allStop then return end
+			wait(1)
+		until MenuFrame.Visible and TimeFrame.Visible
+		timeDelta_ = os.time() - timeStart_
+		honeyDelta_ = game.Players.LocalPlayer.CoreStats.Honey.Value - honeyStart_
 	end
+	StartStopButton.Text = "Start"
+	ButtonState.ButtonActivation(StartStopButton)
 end)
 
-ResetBotton.MouseButton1Up:Connect(function()
-	if	ResetBotton.AutoButtonColor then
-		ResetBotton.AutoButtonColor = false
-		ResetBotton.BackgroundColor3 = GuiColor.LBlack_
+ResetButton.MouseButton1Up:Connect(function()
+	if	ResetButton.AutoButtonColor then
+		ResetButton.AutoButtonColor = false
+		ResetButton.BackgroundColor3 = GuiColor.Text_LBlack_
 		humanoidRootPart = workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart
 		TextHoney.Text = "Honey:"
 		TextTime.Text = "Time:"
 		TextHour.Text = "Pollen: in hout"
 		TextDay.Text = "Pollen: in day"
 		wait(3)
-		ResetBotton.BackgroundColor3 = GuiColor.Base_
-		ResetBotton.AutoButtonColor = true
+		ResetButton.BackgroundColor3 = GuiColor.Base_
+		ResetButton.AutoButtonColor = true
 	end
 end)
 
