@@ -1,5 +1,6 @@
 --[[for _,v in pairs(game.CoreGui:GetChildren()) do
 	if	v.Name == "[SubsidiaryGUI]MainGUI" then
+		print("----------- Closed "..v.Name.." -----------")
 		v:Destroy()
 	end
 end]]
@@ -419,6 +420,7 @@ local TimeMenuButton = MenuFrame:WaitForChild("TimeMenuButton")
 
 DestroyButton.MouseButton1Up:connect(function()
 	allStop = true
+	print("----------- Closed "..S_U_B_S_I_D_I_A_R_Y_Gui.Name.." BEE SWARM -----------")
 	S_U_B_S_I_D_I_A_R_Y_Gui:Destroy()
 end)
 
@@ -655,16 +657,19 @@ local ButtonState = {
 	ButtonOnOff = function (button)
 		if	button.BackgroundColor3 == GuiColor.Base_ then
 			button.BackgroundColor3 = GuiColor.On_Color_G
+			print(button.Name, "on")
 			return true
 		else
 			button.AutoButtonColor = false
 			button.BackgroundColor3 = GuiColor.Text_LBlack_
+			print(button.Name, "off")
 			return false
 		end
 	end,
 	ButtonActivation = function (button)
 		button.AutoButtonColor = true
 		button.BackgroundColor3 = GuiColor.Base_
+		print(button.Name, "actived")
 	end,
 	LaunchPeriod = function (button, second)
 		for i = 1, math.floor(second) do
@@ -687,9 +692,11 @@ local function triggeringEvent(button,comand,count,delay)
 	local A_1 = {["Name"] = comand}
 	local Event = game:GetService("ReplicatedStorage").Events.PlayerActivesCommand
 	Event:FireServer(A_1)
+	print(button.Name, "fire")
 	for i = 1, count-1 do
 		if	not ButtonState.LaunchPeriod(button, delay) then break end
 		Event:FireServer(A_1)
+		print(button.Name, "fire")
 	end
 	ButtonState.ButtonActivation(button)
 end
@@ -760,7 +767,7 @@ end
 		repeat
 			if	allStop then return end
 			wait(1)
-		until MenuFrame.Visible and TimeFrame.Visible
+		until MenuFrame.Visible or TimeFrame.Visible
 		timeDelta_ = os.time() - timeStart_
 		honeyDelta_ = game.Players.LocalPlayer.CoreStats.Honey.Value - honeyStart_
 	end
@@ -780,6 +787,7 @@ ResetButton.MouseButton1Up:Connect(function()
 		wait(3)
 		ResetButton.BackgroundColor3 = GuiColor.Base_
 		ResetButton.AutoButtonColor = true
+		print(ResetButton.Name, "use")
 	end
 end)
 
