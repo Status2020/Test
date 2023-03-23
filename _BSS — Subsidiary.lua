@@ -767,7 +767,7 @@ end
 		repeat
 			if	allStop then return end
 			wait(1)
-		until MenuFrame.Visible or TimeFrame.Visible
+		until MenuFrame.Visible and TimeFrame.Visible
 		timeDelta_ = os.time() - timeStart_
 		honeyDelta_ = game.Players.LocalPlayer.CoreStats.Honey.Value - honeyStart_
 	end
