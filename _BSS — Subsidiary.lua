@@ -96,10 +96,13 @@ local ButtonState = {
 
 	OnOff = function(button)
 		if	button.BackgroundColor3 == GuiColor.Base_ then
-			On(button)
+			button.BackgroundColor3 = GuiColor.On_Color_G
+			print(button.Name, "on")--ButtonState.On(button)
 			return true
 		else
-			Off(button)
+			button.AutoButtonColor = false
+			button.BackgroundColor3 = GuiColor.Text_LBlack_
+			print(button.Name, "off")--ButtonState.Off(button)
 			return false
 		end
 	end,
@@ -608,7 +611,10 @@ local autoJellyBeansButton = createButton({Size=ButtonState.Size(ButtonSet),Posi
 ButtonState.Forms(ButtonSet,3,1,1)
 local autoMagicBeanButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
 	Text="MagicBean",Name="autoMagicBeanButton",Parent=useFrame,TextColor3=GuiColor.Text_Green_})
-
+ButtonState.Forms(ButtonSet,4,1,1)
+local autoStingerButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
+	Text="Stinger",Name="autoStingerButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
+--Coconut Gumdrops
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
 	local A_1 = {["Name"] = comand}
@@ -629,6 +635,8 @@ autoJellyBeansButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoJellyBeansButton,"Jelly Beans",19,50)end)
 autoMagicBeanButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoMagicBeanButton,"Magic Bean",10,10)end)
+autoStingerButton.MouseButton1Up:Connect(function()
+	triggeringEvent(autoStingerButton,"Stinger",30,30)end)
 
 end)
 
@@ -712,16 +720,14 @@ end)
 
 resetButton.MouseButton1Up:Connect(function()
 	if resetButton.AutoButtonColor then
-		resetButton.AutoButtonColor = false
-		resetButton.BackgroundColor3 = GuiColor.Text_LBlack_
+		ButtonState.Off(resetButton)
 		humanoidRootPart = workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart
 		textHoney.Text = "Honey:"
 		textTime.Text = "Time:"
 		textHour.Text = "Pollen: in hout"
 		textDay.Text = "Pollen: in day"
 		wait(3)
-		resetButton.BackgroundColor3 = GuiColor.Base_
-		resetButton.AutoButtonColor = true
+		ButtonState.Activation(resetButton)
 		print(resetButton.Name, "use")
 	end
 end)
