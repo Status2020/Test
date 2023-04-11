@@ -614,7 +614,10 @@ local autoMagicBeanButton = createButton({Size=ButtonState.Size(ButtonSet),Posit
 ButtonState.Forms(ButtonSet,4,1,1)
 local autoStingerButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
 	Text="Stinger",Name="autoStingerButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
---Coconut Gumdrops
+ButtonState.Forms(ButtonSet,5,1,2)
+local autoSnowflakeButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
+	Text="Stinger",Name="autoSnowflakeButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
+--Coconut Gumdrops 
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
 	local A_1 = {["Name"] = comand}
@@ -637,6 +640,9 @@ autoMagicBeanButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoMagicBeanButton,"Magic Bean",10,10)end)
 autoStingerButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoStingerButton,"Stinger",30,30)end)
+	
+autoSnowflakeButton.MouseButton1Up:Connect(function()
+	triggeringEvent(autoSnowflakeButton,"Snowflake",300,10)end)
 
 end)
 
