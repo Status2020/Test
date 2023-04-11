@@ -604,7 +604,7 @@ spawn(function()-----useFrame-----
 
 ButtonState.Forms(ButtonSet,1,1,1)
 local autoCloudButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
-	Text="Cloud",Name="autoCloudButton",Parent=useFrame})
+	Text="Cloud 10",Name="autoCloudButton",Parent=useFrame})
 ButtonState.Forms(ButtonSet,2,1,1)
 local autoJellyBeansButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
 	Text="Jelly Beans 19",Name="autoJellyBeansButton",Parent=useFrame})
@@ -616,7 +616,7 @@ local autoStingerButton = createButton({Size=ButtonState.Size(ButtonSet),Positio
 	Text="Stinger 30",Name="autoStingerButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
 ButtonState.Forms(ButtonSet,5,1,2)
 local autoSnowflakeButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
-	Text="Snowflake 300",Name="autoSnowflakeButton",Parent=useFrame})
+	Text="Snowflake 300",Name="autoSnowflakeButton",Parent=useFrame,TextSize=9})
 --Coconut Gumdrops 
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
