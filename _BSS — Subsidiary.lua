@@ -607,16 +607,16 @@ local autoCloudButton = createButton({Size=ButtonState.Size(ButtonSet),Position=
 	Text="Cloud",Name="autoCloudButton",Parent=useFrame})
 ButtonState.Forms(ButtonSet,2,1,1)
 local autoJellyBeansButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
-	Text="Jelly Beans",Name="autoJellyBeansButton",Parent=useFrame})
+	Text="Jelly Beans 19",Name="autoJellyBeansButton",Parent=useFrame})
 ButtonState.Forms(ButtonSet,3,1,1)
 local autoMagicBeanButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
-	Text="MagicBean",Name="autoMagicBeanButton",Parent=useFrame,TextColor3=GuiColor.Text_Green_})
+	Text="MagicBean 10",Name="autoMagicBeanButton",Parent=useFrame,TextColor3=GuiColor.Text_Green_})
 ButtonState.Forms(ButtonSet,4,1,1)
 local autoStingerButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
-	Text="Stinger",Name="autoStingerButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
+	Text="Stinger 30",Name="autoStingerButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
 ButtonState.Forms(ButtonSet,5,1,2)
 local autoSnowflakeButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
-	Text="Snowflake",Name="autoSnowflakeButton",Parent=useFrame})
+	Text="Snowflake 300",Name="autoSnowflakeButton",Parent=useFrame})
 --Coconut Gumdrops 
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
