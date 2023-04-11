@@ -616,7 +616,7 @@ local autoStingerButton = createButton({Size=ButtonState.Size(ButtonSet),Positio
 	Text="Stinger",Name="autoStingerButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
 ButtonState.Forms(ButtonSet,5,1,2)
 local autoSnowflakeButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
-	Text="Stinger",Name="autoSnowflakeButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
+	Text="Snowflake",Name="autoSnowflakeButton",Parent=useFrame})
 --Coconut Gumdrops 
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
