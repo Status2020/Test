@@ -620,6 +620,7 @@ local autoSnowflakeButton = createButton({Size=ButtonState.Size(ButtonSet),Posit
 --Coconut Gumdrops 
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
+	local text = button.Text
 	local A_1 = {["Name"] = comand}
 	local Event = game:GetService("ReplicatedStorage").Events.PlayerActivesCommand
 	Event:FireServer(A_1)
@@ -628,7 +629,9 @@ local function triggeringEvent(button,comand,count,delay)
 		if not ButtonState.LaunchPeriod(button, delay) then break end
 		Event:FireServer(A_1)
 		print(button.Name, "fire")
+		button.Text = text..": "..i
 	end
+	button.Text = text
 	ButtonState.Activation(button)
 end
 
