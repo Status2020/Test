@@ -15,9 +15,9 @@ local GuiColor = {
 	Text_LBlack_= Color3.new(0.3,0.3,0.3),
 	Text_White_	= Color3.new(1,1,1),
 	Text_Black_	= Color3.new(0,0,0),
-	Text_Red_	= Color3.new(1,0.5,0.5),
-	Text_Green_	= Color3.new(0.5,1,0.5),
-	Text_Blue_	= Color3.new(0.5,0.5,1),
+	Text_Red_	= Color3.new(1,0.7,0.7),
+	Text_Green_	= Color3.new(0.7,1,0.7),
+	Text_Blue_	= Color3.new(0.7,0.7,1),
 	
 	On_Color_G	= Color3.new(0, 1, 0),
 	On_Color_B	= Color3.new(0, 1, 1),
@@ -195,6 +195,15 @@ spawn(function()
 	print("----------- Start "..S_U_B_S_I_D_I_A_R_Y_Gui.Name.." BEE SWARM -----------")
 	startFrame:TweenPosition(ObjectsPositions.StartFrame_Pos2,
 		Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .5, true)
+	
+local function humanoidReboot()
+	while not allStop do
+		humanoidRootPart = workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart
+		wait(120)
+	end
+end
+coroutine.wrap(humanoidReboot)()
+
 end)
 
 spawn(function()-----menuFrame, headingFrame-----
@@ -476,6 +485,9 @@ local snailTPButton = createButton({Size=ButtonState.Size(ButtonSet),Position=Bu
 ButtonState.Forms(ButtonSet,11,1,1)
 local comandorTPButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
 	Text="Comandor",Name="comandorTPButton",Parent=bearFrame})
+ButtonState.Forms(ButtonSet,12,1,1)
+local roboBearButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
+	Text="Robo Bear",Name="roboBearButton",Parent=bearFrame})
 
 polarBearTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Polar Bear"] end)
 blackBearTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Black Bear"] end)
@@ -488,6 +500,7 @@ kingBeetleTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = W
 tunnelBearTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Tunnel Bear"] end)
 snailTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Snail"] end)
 comandorTPButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Comandor"] end)
+roboBearButton.MouseButton1Up:Connect(function() humanoidRootPart.CFrame = Waypoints["Robo Bear"] end)
 
 end)
 
@@ -598,6 +611,7 @@ Waypoints = {-----Waypoints-----
 ["Tunnel Bear"] = CFrame.new(507.3, 5.7, -45.7),
 ["Snail"] = CFrame.new(420, 117,-178),
 ["Comandor"] = CFrame.new(520.7, 47, 162),
+["Robo Bear"] = CFrame.new(-440, 42, 111),
 }
 
 spawn(function()-----useFrame-----
@@ -617,6 +631,7 @@ local autoStingerButton = createButton({Size=ButtonState.Size(ButtonSet),Positio
 ButtonState.Forms(ButtonSet,5,1,2)
 local autoSnowflakeButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
 	Text="Snowflake 300",Name="autoSnowflakeButton",Parent=useFrame,TextSize=9})
+
 --Coconut Gumdrops 
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
@@ -626,10 +641,10 @@ local function triggeringEvent(button,comand,count,delay)
 	Event:FireServer(A_1)
 	print(button.Name, "fire")
 	for i = 1, count-1 do
+		button.Text = text..": "..i
 		if not ButtonState.LaunchPeriod(button, delay) then break end
 		Event:FireServer(A_1)
 		print(button.Name, "fire")
-		button.Text = text..": "..i
 	end
 	button.Text = text
 	ButtonState.Activation(button)
