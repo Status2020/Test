@@ -663,7 +663,7 @@ local function startRBC(button,comand,delay)
 	Counter.RoboPartyCake = 1
 	button.Text = Counter.RBCText..": "..Counter.RoboPartyCake
 	wait(3)
-	local A_1 = {["Name"] = comand}
+	local A_1 = comand
 	local Event = game:GetService("ReplicatedStorage").Events.ToyEvent
 	Event:FireServer(A_1)
 	print(button.Name, "fire")
