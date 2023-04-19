@@ -67,6 +67,7 @@ function createTextLabel(properties)
 end
 
 local ButtonState = {
+
 	Forms = function(buTTon,row,column,segment)
 		buTTon.Row = row
 		buTTon.Column = column
@@ -628,11 +629,15 @@ local autoMagicBeanButton = createButton({Size=ButtonState.Size(ButtonSet),Posit
 ButtonState.Forms(ButtonSet,4,1,1)
 local autoStingerButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
 	Text="Stinger 30",Name="autoStingerButton",Parent=useFrame,TextColor3=GuiColor.Text_LWhite_})
-ButtonState.Forms(ButtonSet,5,1,2)
+	
+ButtonState.Forms(ButtonSet,5,1,3)
 local autoSnowflakeButton = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
 	Text="Snowflake 300",Name="autoSnowflakeButton",Parent=useFrame,TextSize=9})
-
+ButtonState.Forms(ButtonSet,6,1,3)
+local autoRoboParty = createButton({Size=ButtonState.Size(ButtonSet),Position=ButtonState.Position(ButtonSet),
+	Text="Robo Party",Name="autoRoboParty",Parent=useFrame,TextSize=9})
 --Coconut Gumdrops 
+
 local function triggeringEvent(button,comand,count,delay)
 	if not ButtonState.OnOff(button) then return end
 	local text = button.Text
@@ -650,6 +655,41 @@ local function triggeringEvent(button,comand,count,delay)
 	ButtonState.Activation(button)
 end
 
+local Counter={RoboPartyCake=0,RBCText="Robo Party"}
+local function triggeringToyEvent(button,comand,delay)
+
+local function startRBC(button,comand,delay)
+	ButtonState.On(button)
+	Counter.RoboPartyCake = 1
+	button.Text = Counter.RBCText..": "..Counter.RoboPartyCake
+	wait(3)
+	local A_1 = {["Name"] = comand}
+	local Event = game:GetService("ReplicatedStorage").Events.ToyEvent
+	Event:FireServer(A_1)
+	print(button.Name, "fire")
+	while Counter.RoboPartyCake > 1 do
+		Counter.RoboPartyCake = Counter.RoboPartyCake - 1
+		button.Text = Counter.RBCText..": "..Counter.RoboPartyCake
+		if not ButtonState.LaunchPeriod(button, delay) then break end
+		Event:FireServer(A_1)
+		print(button.Name, "fire")
+	end
+	Counter.RoboPartyCake = 0
+	button.Text = Counter.RBCText
+	ButtonState.Activation(button)
+	return
+end
+
+	if button.BackgroundColor3 == GuiColor.Base_ then
+		startRBC(button,comand,delay)
+	elseif Counter.RoboPartyCake > 5 then
+		ButtonState.Off(button)
+	elseif button.BackgroundColor3 == GuiColor.On_Color_G then
+		Counter.RoboPartyCake = Counter.RoboPartyCake + 1
+		button.Text = Counter.RBCText..": "..Counter.RoboPartyCake
+	end
+end
+
 autoCloudButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoCloudButton,"Cloud Vial",10,90)end)
 autoJellyBeansButton.MouseButton1Up:Connect(function()
@@ -658,9 +698,11 @@ autoMagicBeanButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoMagicBeanButton,"Magic Bean",10,10)end)
 autoStingerButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoStingerButton,"Stinger",30,30)end)
-	
+
 autoSnowflakeButton.MouseButton1Up:Connect(function()
 	triggeringEvent(autoSnowflakeButton,"Snowflake",300,10)end)
+autoRoboParty.MouseButton1Up:Connect(function()
+	triggeringToyEvent(autoRoboParty,"Robo Party Cake",10800)end)
 
 end)
 
