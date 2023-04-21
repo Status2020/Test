@@ -698,34 +698,35 @@ end
 	end
 end
 
-local function searchCFrame(object)---+++
-	for _, k in pairs(object:GetDescendants()) do
-		if	k:IsA("BasePart") then
-			return k.CFrame
+local FunZone = {}; do--+++
+	searchCFrame = function(object)
+		for _, k in pairs(object:GetDescendants()) do
+			if	k:IsA("BasePart") then
+				return k.CFrame
+			end
+		end
+	end
+	
+	Zone = {NPCBees_="NPCBees",Monsters_="Monsters";}
+	Bosses = {Windy_="Windy",Vicious_="Vicious",Stick_Bug="Stick Bug",Snail_="Snail"}--Monsters
+	checkMonsterInZone = function(zone,monster)
+		for _,v in pairs(game.workspace[zone]:GetChildren()) do
+			if	string.find(v.Name,monster) then
+				return true,v
+			end
+		end
+		return false
+	end
+	
+	goMonsterInZone = function(zone,monster)
+		local is,monstr = checkMonsterInZone(zone,monster)
+		if is then
+			humanoidRootPart.CFrame = searchCFrame(v)
+			print("GO to Monster",monster)
+			return v
 		end
 	end
 end
-
-local Zone = {NPCBees_="NPCBees",Monsters_="Monsters";}
-local Mobs = {Windy_="Windy",Vicious_="Vicious",Stick_Bug="Stick Bug",Snail_="Snail"}
-local function checkMonsterInZone(zone,monster)---+++
-	for _,v in pairs(game.workspace[zone]:GetChildren()) do
-		if	string.find(v.Name,monster) then
-			return true,v
-		end
-	end
-	return false
-end
-
-local function goMonsterInZone(zone,monster)---+++
-	local is,monstr = checkMonsterInZone(zone,monster)
-	if is then
-		humanoidRootPart.CFrame = searchCFrame(v)
-		print("GO to Monster",monster)
-		return v
-	end
-end
-
 
 local function MushroomSearch()
 if ActionFlags.MushroomLvl > 0 then
@@ -971,8 +972,8 @@ end
 --========================================--
 local function trackingFunction()
 	local function trackingMonsters()---+++
-		if	checkMonsterInZone(Zone.Monsters_,Monsters.Windy_) or
-			checkMonsterInZone(Zone.NPCBees_,Monsters.Windy_) then
+		if	checkMonsterInZone(Zone.Monsters_,Bosses.Windy_) or
+			checkMonsterInZone(Zone.NPCBees_,Bosses.Windy_) then
 			buttonTPWindy.Visible = true
 			buttonAutoWindy.TextColor3 = GuiColor.Color_LBlack_
 			textView.TextColor3 = GuiColor.Color_LBlack_
@@ -981,7 +982,7 @@ local function trackingFunction()
 			buttonAutoWindy.TextColor3 = GuiColor.Base_
 			textView.TextColor3 = GuiColor.Base_
 		end
-		if	checkMonsterInZone(Zone.Monsters_,Monsters.Vicious_) then
+		if	checkMonsterInZone(Zone.Monsters_,Bosses.Vicious_) then
 			buttonTPVicious.Visible = true
 			buttonAutoVicious.TextColor3 = GuiColor.TextR1
 			textView.TextColor3 = GuiColor.TextR1
@@ -990,7 +991,7 @@ local function trackingFunction()
 			buttonAutoVicious.TextColor3 = GuiColor.Base_
 			textView.TextColor3 = GuiColor.Base_
 		end
-		if	checkMonsterInZone(Zone.Monsters_,Monsters.Stick_Bug) then
+		if	checkMonsterInZone(Zone.Monsters_,Bosses.Stick_Bug) then
 			buttonAutoStickBug.TextColor3 = GuiColor.Green_
 		else
 			buttonAutoStickBug.TextColor3 = GuiColor.Base_
@@ -1370,7 +1371,7 @@ if buttonTPWindy.Visible then
 		end
 	end
 	wait(.3)
-	for _,r in pairs(game.workspace.Monsters:GetChildren()) do			-- Monsters
+	for _,r in pairs(game.workspace.Monsters:GetChildren()) do
 	if string.find(r.Name,"Windy") then
 		--game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
 		humanoidRootPart.CFrame = r.HumanoidRootPart.CFrame * CFrame.new(0,30,0)
@@ -1774,13 +1775,13 @@ spawn(function()------------------main_Frame-------------------
 		humanoidRootPart.CFrame = CFrame.new(-486, 124, 517)
 	end)
 	
-	buttonTPVicious.MouseButton1Down:Connect(function() goMonsterInZone(Zone.Monsters_,Monsters.Vicious_) end)
+	buttonTPVicious.MouseButton1Down:Connect(function() goMonsterInZone(Zone.Monsters_,Bosses.Vicious_) end)
 	
 	buttonTPWindy.MouseButton1Down:Connect(function()
-		if	checkMonsterInZone(Zone.NPCBees_,Monsters.Windy_) then
-			goMonsterInZone(Zone.NPCBees_,Monsters.Windy_)
+		if	checkMonsterInZone(Zone.NPCBees_,Bosses.Windy_) then
+			goMonsterInZone(Zone.NPCBees_,Bosses.Windy_)
 		else
-			goMonsterInZone(Zone.Monsters_,Monsters.Windy_)
+			goMonsterInZone(Zone.Monsters_,Bosses.Windy_)
 		end
 	end)
 	
