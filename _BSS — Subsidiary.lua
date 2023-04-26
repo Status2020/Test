@@ -92,7 +92,7 @@ local ButtonState = {}; do
 	ButtonState.Off = function(button)
 		button.AutoButtonColor = false
 		button.Active = false
-		--button.BackgroundColor3 = GuiColor.Text_LBlack_
+		button.BackgroundColor3 = GuiColor.Text_LBlack_
 		print(button.Name, "off")
 	end
 
@@ -282,7 +282,7 @@ spawn(function()-----menuFrame, headingFrame-----
 	timeMenuButton.MouseButton1Up:Connect(function()displayFrame(timeMenuButton,timeFrame)end)
 
 	local function toggleFrameVisibility(input, gameProcessed)
-		if not allStop and input.KeyCode == Enum.KeyCode.P then
+		if not allStop and input.KeyCode == Enum.KeyCode.B then
 			hideMenu()
 		end
 	end
